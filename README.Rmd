@@ -1,0 +1,39 @@
+---
+title: "GCD - Project - Aggregate sensor data"
+output: html_document
+author: Brent A.
+---
+
+
+The run_analysis.R code here collates data that has been gathered from UCI's Machine Learning Repository. (http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones)
+
+The data that is downloaded has been placed into a folder within the current working direcotry as below.
+
+-Current WD
+--UCI HAR Dataset
+---train
+----Inertial sensors
+---test
+----Inertial sensors
+
+This hierarchy is not validated, as it is expected to already exist when the downloaded package is unzipped.
+
+When the script starts, it sets a few inital variables based on the hierarchy above. It then reads in the main key files that are used as lookups in the other data files. 
+
+Once these are loaded, the script then iterates through the 'test' and 'train' folders binding all the data togther into one master record. 
+
+Once the master record has been created, we skim down the unwanted columns leaving the keys along with the means and std of our desired measuremnts. 
+
+Lastly, a smaller subset of data is created as a calculation of each SUBJECT x ACTIVITY combination's mean value (30 subjects x 6 activity types = 180 records). The mean value is calucated for each of the 66 variables that represent the original mean and std of the inertial sensor measurements. This small subset is then written out to the file "gcd_project_tidy_set.txt".
+
+
+GCD_PROJECT_TIDY_SET Meta Data
+
+SUBJECT_ID
+  Refers to the subject from which the data was collected. Values range from 1 to 30.
+  
+ACTIVITY
+  Refers to the type of activity that was being conducted when the data was collected. This includes types such as "LAYING", "WALKING", et al.
+  
+tBodyAcc-mean()-X through fBodyBodyGyroJerkMag-std()
+  Each value here is the mean calculation of every SUJBECT X ACTIVITY combination for which there is a record. 
